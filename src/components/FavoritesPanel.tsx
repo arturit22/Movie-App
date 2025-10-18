@@ -5,10 +5,18 @@ type FavoritesPanelProps = {
     onRemove: (id:string) => void;
 };
 
+
+
 export function FavoritesPanel({items, onRemove}: FavoritesPanelProps) {
+    const hasValidItems = items.some(movie => 
+        movie.title &&
+        movie.title.trim() != '' &&
+        movie.id &&
+        movie.id.trim() != ''
+    );
     return (
-        <div className="absolute right-0 mt-2 w-72 max-h-96 overflow-y-auto bg-white border rounded-lg shadow">
-            {items.length === 0 ? (
+        <div className="absolute right-0 mt-2 w-72 max-h-96 overflow-y-auto bg-white border  shadow">
+            {!hasValidItems ? (
                 <div className="p-3 text-sm text-gray-500">Empty</div>
             ) : (
                 <ul className="p-2 space-y-2">
